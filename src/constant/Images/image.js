@@ -104,8 +104,16 @@ import wo from '../../assets/new/services/wo.png'
 import wd from '../../assets/new/services/wd.png'
 import whatsapp from '../../assets/new/whatsapp.png'
 import webdevWhite from '../../assets/logo/webdev.png'
+import logoWhite from '../../assets/logo/logoWhite.png'
+import logoBlack from '../../assets/logo/logoBlack.png'
+import logoText from '../../assets/logo/logoText.png'
+import logoIcon from '../../assets/logo/logoIcon.png'
 
 const image = {
+  logoText,
+  logoIcon,
+  logoWhite,
+  logoBlack,
   logo,
   logo2,
   webdevWhite,

@@ -234,13 +234,13 @@
   position: relative;
   /* background-color: #ff5b69; */
   background-image: linear-gradient(to right, #ee0979 0%, #ff6a00  51%, #ee0979  100%);
-  padding: 12px 24px;
+  padding: 8px 20px;
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;    
   font-weight: 700;        
-  border-radius: 43px;
+  border-radius: 42px;
   /* border: 1px solid #ee0979; */
   /* display: block; */
   z-index: 1;

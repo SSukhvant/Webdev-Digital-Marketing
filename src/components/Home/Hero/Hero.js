@@ -17,8 +17,8 @@ const Home = () => {
     exit={{opacity: 0, y:15}}
     transition={{delay: 0.25}}
     className="flex-1">
-    <h1 className="text-4xl lg:text-6xl text-white font-extrabold mb-4 capitalize">You speak and we help you execute it in your own way!! Welcome To WebDev!</h1>
-    <p className="text-base text-white mb-4">WebDev have experts who are experienced and knows how and what specification of a company or a product are to be showcased.</p>
+    <h1 className="text-4xl lg:text-6xl text-white font-extrabold mb-4 capitalize">You speak and we help you execute it in your own way!! Welcome To The Smart Pixel!</h1>
+    <p className="text-base text-white mb-4">The Smart Pixel have experts who are experienced and knows how and what specification of a company or a product are to be showcased.</p>
     <div className="flex gap-5">
     <Link href="/contact" className="primary-btn shadow-lg">Get Started</Link>
     <Link href="/about" className="secondary-btn shadow-lg">Know More</Link>

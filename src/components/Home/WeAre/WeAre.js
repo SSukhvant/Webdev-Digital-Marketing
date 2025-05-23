@@ -28,7 +28,7 @@ const WeAre = () => {
               </div>
 
               <p className="app__text pb-10">
-              Everyone has gone digital with this era and so has gone the ways of promoting your work, business, and lifestyle. Digital Marketing is the boon we are talking about. WebDev Private Limited provides such convenience to you. Now that you know about digital marketing do you have the time and energy to make attractive slogans, digital posters, and attention-seeking layouts?
+              Everyone has gone digital with this era and so has gone the ways of promoting your work, business, and lifestyle. Digital Marketing is the boon we are talking about. The Smart Pixel provides such convenience to you. Now that you know about digital marketing do you have the time and energy to make attractive slogans, digital posters, and attention-seeking layouts?
               </p>
               <div>
                 <Link href="/about">

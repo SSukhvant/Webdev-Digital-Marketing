@@ -97,15 +97,15 @@ const Header = () => {
         <div className="flex flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <Image
-              className="h-10 w-auto"
-              src={segment === null ? image.webdevWhite : image.logo}
-              alt=""
-              width={250}
-              height={70}
+              className="h-6 w-auto sm:h-8 md:h-10 transition-all duration-300"
+              src={segment === null ? image.logoWhite : image.logoBlack}
+              alt="Company Logo"
+              width={200}
+              height={60}
+              priority
             />
           </Link>
         </div>
-
         <div
           className={`hidden md:flex justify-center items-center gap-0 lg:gap-7 ${
             segment === null ? "text-[#eeeeee]" : "text-gray-900 "
@@ -175,7 +175,7 @@ const Header = () => {
         </div>
 
         <div className="flex flex-1 justify-end">
-          <a href="tel:+917906514988" className="navbar-btn shadow-lg">
+          <a href="tel:+911234567890" className="navbar-btn shadow-lg">
             Call Us
           </a>
         </div>

@@ -88,20 +88,20 @@ const Footer = () => {
                 </h3>
               </div>
               <ul className="">
-                <li className="my-2 text-slate-200 hover:text-white transition-all duration-300">
+                {/* <li className="my-2 text-slate-200 hover:text-white transition-all duration-300">
                   <a
                     className="text-sm text-white text-bold flex items-center justify-center md:justify-start gap-2"
                     href="tel:1234567890"
                   >
-                <FaPhoneSquareAlt/> +91-1234567890
+                <FaPhoneSquareAlt/> +91-
                   </a>
-                </li>
+                </li> */}
                 <li className="my-2 text-slate-200 hover:text-white transition-all duration-300">
                   <a
                     className="text-sm text-white text-sbold flex items-center justify-center md:justify-start gap-2"
-                    href="mailto:webdevstudio1@gmail.com"
+                    href="mailto:info@thesmartpixel.tech"
                   >
-                  <FaEnvelope/> webdev@example.com
+                  <FaEnvelope/> info@thesmartpixel.tech
                   </a>
                 </li>
                 <li className="mt-8">
@@ -148,7 +148,7 @@ const Footer = () => {
 
       <div className="text-center py-6 mt-4 md:mt-8 lg:mt-12 mb-[4.5rem] md:mb-0">
       <p className="text-sm text-slate-200 hover:text-white transition-all duration-300">
-        © Copyright <a href="#">WebDev.com</a> 2022. All rights reserved.
+        © Copyright <a href="#">thesmartpixel.tech</a> 2022. All rights reserved.
       </p>
     </div>
 

@@ -46,7 +46,7 @@ export default function ContactForm({ heading, color }) {
                 dangerouslySetInnerHTML={{ __html: heading }}
               />
               <div className="flex items-center gap-x-4 mt-4 text-sm leading-6">
-                <a
+                {/* <a
                   className="text-sm text-gray-600 text-bold flex items-center justify-center md:justify-start gap-2"
                   href="tel:7906514988"
                 >
@@ -54,7 +54,7 @@ export default function ContactForm({ heading, color }) {
                     <FaPhoneSquareAlt />
                   </span>{" "}
                   +91-1234567890
-                </a>
+                </a> */}
                 <a
                   className="text-sm text-gray-600 text-sbold flex items-center justify-center md:justify-start gap-2"
                   href="mailto:info@WebDev.com"
@@ -62,7 +62,7 @@ export default function ContactForm({ heading, color }) {
                   <span className="text-[#EA4335]">
                     <FaEnvelope />
                   </span>{" "}
-                  info@WebDev.com
+                  info@thesmartpixel.tech
                 </a>
               </div>
 

@@ -48,7 +48,7 @@ const ContactAddress = () => {
                 <Image src={image.call} alt="call" />
               </div>
               <div className="contact-card-content mt-4">
-                <h6 className='font-semibold'>+91-1234567890 </h6>
+                <h6 className='font-semibold'>+91-xxxxxxxxxx </h6>
               </div>
             </div>
           </motion.div>
@@ -58,7 +58,7 @@ const ContactAddress = () => {
                 <Image src={image.chat} alt="chat" />
               </div>
               <div className="contact-card-content mt-4">
-                <h6 className='font-semibold'>info@WebDev.com</h6>
+                <h6 className='font-semibold'>info@thesmartpixel.tech</h6>
               </div>
             </div>
           </motion.div>
@@ -69,9 +69,9 @@ const ContactAddress = () => {
               </div>
               <div className="contact-card-content mt-4">
                 <h6 className='font-semibold'>
-                  Sector 63, Noida,
+                  Sector 91, Mohali,
                   <br />
-                  UP, India - 201301
+                  Punjab, India - 140307
                 </h6>
               </div>
             </div>
