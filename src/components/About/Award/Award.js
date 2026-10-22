@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 
 const Award = () => {
   const statsRef = useRef(null)
-  const countingOn = useInView(statsRef)
+  const countingOn = useInView(statsRef, { once: true })
     const stats = [
         { id: 1, name: 'Satisfied customer', value: <CountUp start={0} end={3580} duration={2}/> ,icon:UserGroupIcon},
         { id: 2, name: 'Business owners are happy with us', value: <CountUp start={0} end={3080} duration={2}/>,icon:UserIcon},
