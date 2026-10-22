@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - master
+      - codex/next16-dependency-upgrade
 
 permissions:
   contents: read
@@ -19,7 +20,7 @@ jobs:
   validate:
     name: Lint and production build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -28,7 +29,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies

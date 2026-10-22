@@ -1,6 +1,5 @@
 import { PageWrapper } from "@/app/page-wrapper"
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs"
-import ContactAddress from "@/components/ContactPage/ContactAddress"
 import ContactForm from "@/components/ContactPage/ContactForm"
 import WebOptimization from "@/components/WebOptimization/WebOptimization"
 

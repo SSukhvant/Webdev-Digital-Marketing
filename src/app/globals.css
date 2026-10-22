@@ -1,10 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 
 
-.app__container{
-  @apply mx-auto max-w-6xl p-6 lg:px-0
+.app__container {
+  @apply mx-auto max-w-6xl p-6;
+}
+
+@media (min-width: 1024px) {
+  .app__container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .app__text{
@@ -297,8 +303,14 @@
   border-radius: 0px;
 }
 
-.primary-heading{
-@apply text-3xl lg:text-4xl font-extrabold capitalize tracking-tight
+.primary-heading {
+  @apply text-3xl font-extrabold capitalize tracking-tight;
+}
+
+@media (min-width: 1024px) {
+  .primary-heading {
+    font-size: var(--text-4xl);
+  }
 }
 
 

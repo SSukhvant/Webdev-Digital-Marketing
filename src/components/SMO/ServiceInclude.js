@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ChartBarIcon, DocumentMagnifyingGlassIcon, MagnifyingGlassIcon, PresentationChartBarIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, DocumentMagnifyingGlassIcon, MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 const variants = {
   hidden: { opacity: 0 },

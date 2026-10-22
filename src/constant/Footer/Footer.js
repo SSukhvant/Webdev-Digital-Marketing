@@ -4,7 +4,6 @@ import { FaFacebook } from "@react-icons/all-files/fa/FaFacebook";
 import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { FaLinkedinIn } from "@react-icons/all-files/fa/FaLinkedinIn";
-import { FaPhoneSquareAlt } from "@react-icons/all-files/fa/FaPhoneSquareAlt";
 import Image from "next/image";
 import image from "../Images/image";
 
