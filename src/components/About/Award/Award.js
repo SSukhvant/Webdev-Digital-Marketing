@@ -1,5 +1,4 @@
 "use client"
-import Stats from '@/components/Home/Stats/Stats'
 import { ClipboardDocumentListIcon, CodeBracketIcon, UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
 import React from 'react'
 import { useState } from 'react';
