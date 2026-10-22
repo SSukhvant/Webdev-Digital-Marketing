@@ -1,47 +1,108 @@
-import { mailOptions, transporter } from '@/config/nodemailer';
-import { NextResponse } from 'next/server';
- 
-const CONTACT_MESSAGE_FIELDS = {
+import { mailOptions, transporter } from "@/config/nodemailer";
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+const CONTACT_FIELDS = {
   name: "Name",
   email: "Email",
-  number: "Number",
+  number: "Phone",
   service: "Service",
   message: "Message",
 };
+const ALLOWED_SERVICES = new Set(["website", "seo", "smo", "campaign", "other"]);
+const MAX_BODY_BYTES = 12_000;
+const MAX_LENGTHS = { name: 100, email: 254, number: 30, service: 30, message: 5_000 };
 
-const generateEmailContent = (data) => {
-  const stringData = Object.entries(data).reduce(
-    (str, [key, val]) =>
-      (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
-    ""
-  );
-  const htmlData = Object.entries(data).reduce((str, [key, val]) => {
-    return (str += `<h3 class="form-heading" align="left">${CONTACT_MESSAGE_FIELDS[key]}</h3><p class="form-answer" align="left">${val}</p>`);
-  }, "");
+// Best-effort process-local protection. Use a shared store (e.g. Redis/Upstash)
+// for deployments with multiple serverless instances.
+const requestsByIp = new Map();
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT = 5;
 
+function jsonError(message, status) {
+  return NextResponse.json({ message }, { status });
+}
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  })[char]);
+}
+
+function isRateLimited(ip, now = Date.now()) {
+  const timestamps = (requestsByIp.get(ip) || []).filter((time) => now - time < RATE_WINDOW_MS);
+  if (timestamps.length >= RATE_LIMIT) {
+    requestsByIp.set(ip, timestamps);
+    return true;
+  }
+  timestamps.push(now);
+  requestsByIp.set(ip, timestamps);
+  if (requestsByIp.size > 2_000) {
+    for (const [key, values] of requestsByIp) {
+      if (!values.some((time) => now - time < RATE_WINDOW_MS)) requestsByIp.delete(key);
+    }
+  }
+  return false;
+}
+
+function validatePayload(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+  const normalized = {};
+  for (const [field, maxLength] of Object.entries(MAX_LENGTHS)) {
+    if (typeof payload[field] !== "string") return null;
+    const value = payload[field].trim();
+    if (!value || value.length > maxLength) return null;
+    normalized[field] = value;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized.email)) return null;
+  if (!/^[+()\d .-]{7,30}$/.test(normalized.number)) return null;
+  if (!ALLOWED_SERVICES.has(normalized.service)) return null;
+  return normalized;
+}
+
+function generateEmailContent(data) {
+  const text = Object.entries(CONTACT_FIELDS)
+    .map(([field, label]) => `${label}:\n${data[field]}`)
+    .join("\n\n");
+  const html = Object.entries(CONTACT_FIELDS)
+    .map(([field, label]) => `<h3>${escapeHtml(label)}</h3><p style="white-space:pre-wrap">${escapeHtml(data[field])}</p>`)
+    .join("");
   return {
-    text: stringData,
-    html: `<!DOCTYPE html><html> <head> <title></title> <meta charset="utf-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <style type="text/css"> body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table{border-collapse: collapse !important;}body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}@media screen and (max-width: 525px){.wrapper{width: 100% !important; max-width: 100% !important;}.responsive-table{width: 100% !important;}.padding{padding: 10px 5% 15px 5% !important;}.section-padding{padding: 0 15px 50px 15px !important;}}.form-container{margin-bottom: 24px; padding: 20px; border: 1px dashed #ccc;}.form-heading{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 400; text-align: left; line-height: 20px; font-size: 18px; margin: 0 0 8px; padding: 0;}.form-answer{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 300; text-align: left; line-height: 20px; font-size: 16px; margin: 0 0 24px; padding: 0;}div[style*="margin: 16px 0;"]{margin: 0 !important;}</style> </head> <body style="margin: 0 !important; padding: 0 !important; background: #fff"> <div style=" display: none; font-size: 1px; color: #fefefe; line-height: 1px;  max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; " ></div><table border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td bgcolor="#ffffff" align="center" style="padding: 10px 15px 30px 15px" class="section-padding" > <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px" class="responsive-table" > <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0" > <tr> <td style=" padding: 0 0 0 0; font-size: 16px; line-height: 25px; color: #232323; " class="padding message-content" > <h2>New Message</h2> <div class="form-container">${htmlData}</div></td></tr></table> </td></tr></table> </td></tr></table> </td></tr></table> </body></html>`,
+    text,
+    html: `<!doctype html><html><body><h2>New website enquiry</h2>${html}</body></html>`,
   };
-};
+}
 
 export async function POST(request) {
-  const res = await request.json();
-  console.log(res)
-  if (!res || !res.name || !res.email || !res.number || !res.service || !res.message) {
-    return NextResponse.status(400).json({ message: "Bad request" });
-  }
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > MAX_BODY_BYTES) return jsonError("Request is too large.", 413);
+
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  const ip = (forwardedFor ? forwardedFor.split(",")[0] : request.headers.get("x-real-ip") || "unknown").trim();
+  if (isRateLimited(ip)) return jsonError("Too many requests. Please try again later.", 429);
+
+  let body;
   try {
+    body = await request.json();
+  } catch {
+    return jsonError("Invalid JSON request body.", 400);
+  }
+
+  const data = validatePayload(body);
+  if (!data) return jsonError("Please provide valid contact details and all required fields.", 400);
+
+  try {
+    const content = generateEmailContent(data);
     await transporter.sendMail({
       ...mailOptions,
-      ...generateEmailContent(res),
-      subject: res.name,
+      ...content,
+      replyTo: data.email,
+      subject: `Website enquiry: ${data.name}`,
     });
-
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.log(err);
-    return NextResponse.json({ message: err.message });
+    return NextResponse.json({ success: true, message: "Your message has been sent." });
+  } catch (error) {
+    console.error("Contact email delivery failed", { name: error?.name, code: error?.code });
+    return jsonError("We could not send your message right now. Please try again later.", 502);
   }
-  return NextResponse.json({ res });
 }
