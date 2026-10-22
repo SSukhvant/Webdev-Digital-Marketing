@@ -1,0 +1,46 @@
+name: Regenerate dependency lockfile
+
+on:
+  push:
+    branches:
+      - codex/next16-dependency-upgrade
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lockfile-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lockfile:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout upgrade branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/next16-dependency-upgrade
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Regenerate npm lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Commit lockfile if changed
+        run: |
+          if git diff --quiet -- package-lock.json; then
+            echo "package-lock.json is already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "chore: regenerate package lockfile for framework upgrade"
+          git push
