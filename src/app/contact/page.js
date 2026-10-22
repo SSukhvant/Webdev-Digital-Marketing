@@ -4,8 +4,8 @@ import ContactForm from "@/components/ContactPage/ContactForm"
 import { PageWrapper } from "../page-wrapper"
 
 export const metadata = {
-  title: 'Contact - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Contact Us",
+  description: "Contact The Smart Pixel to discuss SEO, PPC, social media marketing or web development. Share your project details and get in touch with our team.",
 }
 const Contact = () => {
   return (
