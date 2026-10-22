@@ -91,7 +91,6 @@ import smallcircle from '../../assets/img/home1/banner/banner-animation/small-ci
 import webdev from '../../assets/new/svg3.svg'
 import webdev2 from '../../assets/new/wb.png'
 import dm from '../../assets/new/digital-marketing.svg'
-import dm2 from '../../assets/new/dm2.png'
 import announcementIcon from '../../assets/new/announcement-icon.svg'
 import quote from '../../assets/new/quote.svg'
 import client from '../../assets/new/client.png'
@@ -129,7 +128,6 @@ const image = {
    quote,
   announcementIcon,
   dm,
-  dm2,
   webdev2,
    webdev,
   dottedcircle,
