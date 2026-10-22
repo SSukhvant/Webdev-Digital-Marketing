@@ -3,59 +3,7 @@ import { BriefcaseIcon, ChevronDownIcon, Cog6ToothIcon, EnvelopeIcon, HomeIcon, 
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import {
-    SpeakerWaveIcon,
-    CurrencyDollarIcon,
-    ChartBarIcon,
-    ComputerDesktopIcon,
-    RocketLaunchIcon,
-    CommandLineIcon,
-    CodeBracketIcon,
-  } from "@heroicons/react/24/outline";
-  const products = [
-    {
-      name: "Digital Marketing",
-      description: "Maximizing online presence through strategic promotion.",
-      href: "/services/digital-marketing",
-      icon: SpeakerWaveIcon,
-    },
-    {
-      name: "PPC Service",
-      description: "Effective Advertising Through Pay-Per-Click",
-      href: "/services/ppc-service",
-      icon: CurrencyDollarIcon,
-    },
-    {
-      name: "SMO Service",
-      description: "Boosting Online Presence through SMO Services",
-      href: "/services/smo-service",
-      icon: ChartBarIcon,
-    },
-    {
-      name: "SEO Service",
-      description: "Boosting online presence through expert optimization",
-      href: "/services/seo-service",
-      icon: ComputerDesktopIcon,
-    },
-    {
-      name: "Social Marketing",
-      description: "Promoting Brands Through Social Media Engagement.",
-      href: "/services/social-marketing",
-      icon: RocketLaunchIcon,
-    },
-    {
-      name: "Website Optimization",
-      description: "Maximizing website performance for optimal results.",
-      href: "/services/website-optimization",
-      icon: CommandLineIcon,
-    },
-    {
-      name: "Web Development",
-      description: "Creating dynamic websites with coding expertise.",
-      href: "/services/web-development",
-      icon: CodeBracketIcon,
-    },
-  ];
+import serviceNavigation from "@/config/service-navigation";
 
 const BottomBar = () => {
     const activeSegment = useSelectedLayoutSegment();
@@ -99,7 +47,7 @@ const BottomBar = () => {
      <div className={`p-2 absolute w-full z-99 bottom-[4.5rem] left-0 right-0 bg-white rounded-lg drop-shadow-sm grid grid-cols-2 border-[1px] border-t-slate-100 transition-all duration-300 ease-in-out ${
           toggle ? "opacity-100 visible mb-2" : "opacity-0 invisible"
         }`}>
-        {products.map((item) => {
+        {serviceNavigation.map((item) => {
            return(
           <div
             key={item.name}
