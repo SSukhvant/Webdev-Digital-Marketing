@@ -1,5 +1,4 @@
 "use client"
-import image from "@/constant/Images/image"
 import Image from "next/image"
 import { useEffect, useState } from "react";
 
@@ -7,31 +6,31 @@ const WeCan = () => {
    const services = [
     {
         name: "Digital Marketing",
-        imgUrl: image.digitalMarketing,
+        imgUrl: digitalMarketingImage,
         bgColour: "bg-green-100"
     },{
         name: "PPC Services",
-        imgUrl: image.ppc,
+        imgUrl: ppcImage,
         bgColour: "bg-slate-100"
     },{
         name: "SMO Services",
-        imgUrl: image.smo,
+        imgUrl: smoImage,
         bgColour: "bg-yellow-100"
     },{
         name: "SEO Services",
-        imgUrl: image.seo,
+        imgUrl: seoImage,
         bgColour: "bg-rose-100"
     },{
         name: "Social Marketing",
-        imgUrl: image.socialMarketing,
+        imgUrl: socialMarketingImage,
         bgColour: "bg-purple-100"
     },{
         name: "Website Optimization",
-        imgUrl: image.wo,
+        imgUrl: websiteOptimizationImage,
         bgColour: "bg-blue-100"
     },{
         name: "Web Development",
-        imgUrl: image.wd,
+        imgUrl: webDevelopmentImage,
         bgColour: "bg-pink-100"
     },
    ]
