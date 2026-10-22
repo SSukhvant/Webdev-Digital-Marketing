@@ -1,7 +1,9 @@
 "use client"
 import { motion } from 'framer-motion'
-import image from "@/constant/Images/image";
 import Image from "next/image";
+import callIcon from "@/assets/img/svg/call.svg";
+import chatIcon from "@/assets/img/svg/chat.svg";
+import placeholderIcon from "@/assets/img/svg/placeholder.svg";
 import "./ContactAddress.css";
 
 const variants = {
@@ -45,7 +47,7 @@ const ContactAddress = () => {
           <motion.div variants={items}>
             <div className="contact-card common-single-card h4-offer-card paste-hover bg-white flex justify-center items-center flex-col shadow-md">
               <div className="contact-card-icon card-paste svg-paste p-6 drop-shadow-lg">
-                <Image src={image.call} alt="call" />
+                <Image src={callIcon} alt="call" />
               </div>
               <div className="contact-card-content mt-4">
                 <a
@@ -61,7 +63,7 @@ const ContactAddress = () => {
           <motion.div variants={items}>
             <div className="contact-card common-single-card h4-offer-card pink-hover bg-white flex justify-center items-center flex-col shadow-md">
               <div className="contact-card-icon card-pink1 svg-pink1 p-6 drop-shadow-lg">
-                <Image src={image.chat} alt="chat" />
+                <Image src={chatIcon} alt="chat" />
               </div>
               <div className="contact-card-content mt-4">
                 <a
@@ -76,7 +78,7 @@ const ContactAddress = () => {
           <motion.div variants={items}>
             <div className="contact-card common-single-card h4-offer-card purple-hover bg-white flex justify-center items-center flex-col shadow-md">
               <div className="contact-card-icon card-purple svg-purple p-6 drop-shadow-lg">
-                <Image src={image.placeholder} alt="placeholder" />
+                <Image src={placeholderIcon} alt="placeholder" />
               </div>
               <div className="contact-card-content mt-4">
                 <h6 className='font-semibold'>
