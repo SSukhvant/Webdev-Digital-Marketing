@@ -1,230 +1,154 @@
-'use client';
-import image from "@/constant/Images/image";
+"use client";
+
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import {
+  ArrowSmallLeftIcon,
+  ArrowSmallRightIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
-import './PortfolioIsoTop.css'
-import { Suspense, useState } from "react";
-import loading from "@/app/loading";
-import { ArrowSmallLeftIcon, ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import portfolioImages from "./portfolio-images";
 
-const images = [
-  {
-    imgUrl: image.portfolio1,
-  },
-  {
-    imgUrl: image.portfolio2,
-  },
-  {
-    imgUrl: image.portfolio3,
-  },
-  {
-    imgUrl: image.portfolio4,
-  },
-  {
-    imgUrl: image.portfolio5,
-  },
-  {
-    imgUrl: image.portfolio6,
-  },
-  {
-    imgUrl: image.portfolio7,
-  },
-  {
-    imgUrl: image.portfolio8,
-  },
-  {
-    imgUrl: image.portfolio9,
-  },
-  {
-    imgUrl: image.portfolio10,
-  },
-  {
-    imgUrl: image.portfolio11,
-  },
-  {
-    imgUrl: image.portfolio12,
-  },
-  {
-    imgUrl: image.portfolio13,
-  },
-  {
-    imgUrl: image.portfolio14,
-  },
-  {
-    imgUrl: image.portfolio15,
-  },
-  {
-    imgUrl: image.portfolio16,
-  },
-  {
-    imgUrl: image.portfolio17,
-  },
-  {
-    imgUrl: image.portfolio18,
-  },
-  {
-    imgUrl: image.portfolio19,
-  },
-  {
-    imgUrl: image.portfolio20,
-  },
-  {
-    imgUrl: image.p1,
-  },
-  {
-    imgUrl: image.p2,
-  },
-  {
-    imgUrl: image.p3,
-  },
-  {
-    imgUrl: image.p4,
-  },
-  {
-    imgUrl: image.p5,
-  },
-  {
-    imgUrl: image.p6,
-  },
-  {
-    imgUrl: image.p7,
-  },
-  {
-    imgUrl: image.p8,
-  },
-  {
-    imgUrl: image.p9,
-  },
-  {
-    imgUrl: image.p10,
-  },
-  {
-    imgUrl: image.p11,
-  },
-  {
-    imgUrl: image.p12,
-  },
-  {
-    imgUrl: image.p13,
-  },
-  {
-    imgUrl: image.p14,
-  },
-  {
-    imgUrl: image.p15,
-  },
-  {
-    imgUrl: image.p16,
-  },
-  {
-    imgUrl: image.p17,
-  },
-  {
-    imgUrl: image.p18,
-  },
-  {
-    imgUrl: image.p19,
-  },
-  {
-    imgUrl: image.p20,
-  },
-  {
-    imgUrl: image.p21,
-  },
-  {
-    imgUrl: image.p22,
-  },
-  {
-    imgUrl: image.p23,
-  },
-  {
-    imgUrl: image.p24,
-  },
-];
+const thumbnailSizes =
+  "(max-width: 639px) 100vw, (max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw";
+
 const PortfolioIsoTop = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
+  const closeGallery = () => setSelectedIndex(null);
+
+  const showNext = () => {
+    setSelectedIndex((current) =>
+      current === null ? current : (current + 1) % portfolioImages.length,
+    );
   };
 
+  const showPrevious = () => {
+    setSelectedIndex((current) =>
+      current === null
+        ? current
+        : (current - 1 + portfolioImages.length) % portfolioImages.length,
+    );
+  };
+
+  useEffect(() => {
+    if (selectedIndex === null) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setSelectedIndex((current) =>
+          current === null ? current : (current + 1) % portfolioImages.length,
+        );
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setSelectedIndex((current) =>
+          current === null
+            ? current
+            : (current - 1 + portfolioImages.length) % portfolioImages.length,
+        );
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex]);
 
   return (
-    <section className="py-12">
+    <section className="py-12 md:py-16">
       <div className="app__container">
-        <div
-          className="section-title animate"
-          style={{
-            opacity: "1",
-            visibility: "inherit",
-            transform: "translate(0px, 0px)",
-          }}
-        >
-          <h2 className="text-3xl font-semibold text-center">
-            We Have Done Many Others Work <br/>Let’s See Our Works
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">
+            A closer look at our work
           </h2>
+          <p className="mt-3 text-base leading-7 text-gray-600">
+            Explore selected projects from our portfolio.
+          </p>
         </div>
-        <Suspense fallback={loading}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
-          {images.map((i, k) => {
-            return (
-              <div key={k}>
-                <div className="isotop-wrapper relative">
-                  <div className="full-width">
-                    <div
-                      className="example-image-link"
-                      data-lightbox="example-1"
-                      
-                    >
-                      <Image
-                        className="example-image"
-                        src={i.imgUrl}
-                        alt="gallery"
-                        title="gallery"
-                        onClick={() => handleImageClick(k)}
-                      />
-                      {selectedImage === k && (
-                        <div className="fixed z-10 inset-0 overflow-y-auto">
-                          <div className="flex items-center justify-center min-h-screen text-center sm:block">
-                            <div className="fixed inset-0 transition-opacity">
-                              <div className="absolute inset-0 bg-black opacity-60"></div>
-                            </div>
-                            <span
-                              className="hidden sm:inline-block sm:align-middle sm:h-screen"
-                              aria-hidden="true"
-                            >
-                              &#8203;
-                            </span>
-                            <div className="inline-block align-bottom rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                              <div>
-                                <div className="text-center">
-                                  <Image
-                                    src={images[k].imgUrl}
-                                    alt="portfolio"
-                                    width={800}
-                                    height={800}
-                                    onClick={() => setSelectedImage(null)}
-                                  />
-                                  <button onClick={() => setSelectedImage(null)} className="absolute animate-[spin_4s_linear_infinite] -bottom-4 bg-black text-white p-2 rounded-full transition-all duration-300 ease-in-out hover:rotate-90"><XMarkIcon className="h-5 w-5 flex-none"
-                                  aria-hidden="true"/></button>
-                                  <button onClick={() => handleImageClick(k+1)} className="absolute right-0 sm:-right-4 top-1/2 bg-white text-indigo-600 shadow-lg p-2 rounded-full transition-all duration-300 ease-in-out"><ArrowSmallRightIcon className="h-5 w-5 flex-none"
-                                  aria-hidden="true"/></button>
-                                  <button onClick={() => handleImageClick(k-1)} className="absolute left-0 sm:-left-4 top-1/2 bg-white text-indigo-600 shadow-lg p-2 rounded-full transition-all duration-300 ease-in-out"><ArrowSmallLeftIcon className="h-5 w-5 flex-none"
-                                  aria-hidden="true"/></button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-7">
+          {portfolioImages.map((projectImage, index) => (
+            <button
+              key={projectImage.src}
+              type="button"
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`View portfolio project ${index + 1}`}
+              className="group block w-full overflow-hidden rounded-xl bg-gray-100 text-left shadow-sm transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700"
+            >
+              <Image
+                src={projectImage}
+                alt={`Portfolio project ${index + 1}`}
+                sizes={thumbnailSizes}
+                className="block h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
+              />
+            </button>
+          ))}
         </div>
-        </Suspense>
       </div>
+
+      <Dialog
+        open={selectedIndex !== null}
+        onClose={closeGallery}
+        className="relative z-[100]"
+      >
+        <div className="fixed inset-0 bg-black/85" aria-hidden="true" />
+        <div className="fixed inset-0 w-screen overflow-y-auto p-3 sm:p-6">
+          <div className="flex min-h-full items-center justify-center">
+            {selectedIndex !== null && (
+              <DialogPanel className="relative w-full max-w-5xl rounded-xl bg-black p-3 shadow-2xl sm:p-5">
+                <DialogTitle className="sr-only">
+                  Portfolio project {selectedIndex + 1}
+                </DialogTitle>
+
+                <button
+                  type="button"
+                  onClick={closeGallery}
+                  aria-label="Close portfolio image"
+                  className="absolute right-5 top-5 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+
+                <Image
+                  key={selectedIndex}
+                  src={portfolioImages[selectedIndex]}
+                  alt={`Portfolio project ${selectedIndex + 1}`}
+                  sizes="(max-width: 1023px) 100vw, 80vw"
+                  loading="eager"
+                  className="mx-auto block h-auto max-h-[78vh] w-auto max-w-full object-contain"
+                />
+
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={showPrevious}
+                    aria-label="Previous portfolio project"
+                    className="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    <ArrowSmallLeftIcon className="h-5 w-5" aria-hidden="true" />
+                    <span className="hidden sm:inline">Previous</span>
+                  </button>
+                  <p className="text-sm tabular-nums text-white/75" aria-live="polite">
+                    {selectedIndex + 1} of {portfolioImages.length}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={showNext}
+                    aria-label="Next portfolio project"
+                    className="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <ArrowSmallRightIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </div>
+              </DialogPanel>
+            )}
+          </div>
+        </div>
+      </Dialog>
     </section>
   );
 };
