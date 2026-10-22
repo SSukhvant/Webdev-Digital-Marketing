@@ -1,5 +1,12 @@
 "use client"
 import Image from "next/image"
+import digitalMarketingImage from "@/assets/new/services/dm.png";
+import ppcImage from "@/assets/new/services/ppc.png";
+import smoImage from "@/assets/new/services/smo.png";
+import seoImage from "@/assets/new/services/seo.png";
+import socialMarketingImage from "@/assets/new/services/socialMarketing.png";
+import websiteOptimizationImage from "@/assets/new/services/wo.png";
+import webDevelopmentImage from "@/assets/new/services/wd.png";
 import { useEffect, useState } from "react";
 
 const WeCan = () => {
