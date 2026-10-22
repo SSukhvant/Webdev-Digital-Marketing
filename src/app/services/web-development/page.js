@@ -11,8 +11,8 @@ import WebStats from "@/components/WebDevelopment/WebStats"
 import WebWhyUs from "@/components/WebDevelopment/WebWhyUs"
 
 export const metadata = {
-  title: 'Web Development - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Web Development",
+  description: "Discover website development services for businesses that need a clear, usable and responsive online presence.",
 }
 const WebDevelopment = () => {
   const content = [{
