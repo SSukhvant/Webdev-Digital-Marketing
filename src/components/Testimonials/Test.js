@@ -1,7 +1,8 @@
 "use client";
-import image from "@/constant/Images/image";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import clientImage from "@/assets/new/client.png";
+import quoteImage from "@/assets/new/quote.svg";
 import { useEffect, useState } from "react";
 
 const Test = () => {
@@ -11,28 +12,28 @@ const Test = () => {
       name: "Customer",
       message:
         "We have a great business relationship with TheSmartPixel. We had worked with several other marketing companies in the past who did not deliver results and I am happy to say TheSmartPixel is doing that for us. They help bring our vision to life in a way that makes sense",
-      imgUrl: image.client,
+      imgUrl: clientImage,
     },
     {
       id: 2,
       name: "Customer",
       message:
         "TheSmartPixel has done a wonderful job redesigning our website to take it from plain and functional to amazingly professional. We would highly recommend TheSmartPixel to any business that needs a hand improving their internet traffic or their business.",
-      imgUrl: image.client,
+      imgUrl: clientImage,
     },
     {
       id: 3,
       name: "Customer",
       message:
         "Today we work with statistics and more accurate data and realize the digital space is an essential tool for Clinica da Mama to position itself in an increasingly competitive field",
-      imgUrl: image.client,
+      imgUrl: clientImage,
     },
     {
       id: 4,
       name: "Customer",
       message:
         "It really met my requirements. You guys were very patient even though there were delays from my side. The price was competitive and all our requirements were met. If somebody were to ask me for something similar, I would definitely recommend you guys!",
-      imgUrl: image.client,
+      imgUrl: clientImage,
     },
   ];
 
@@ -64,7 +65,7 @@ const Test = () => {
         </div>
         <div className="relative bg-white h-80 shadow-lg px-6 py-12 rounded-xl">
           <Image
-            src={image.quote}
+            src={quoteImage}
             className="absolute bottom-0 right-2"
             height={150}
             width={150}
