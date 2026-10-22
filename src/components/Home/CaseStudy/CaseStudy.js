@@ -1,49 +1,55 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import image from "@/constant/Images/image";
 import Image from "next/image";
+import digitalMarketingImage from "@/assets/new/services/dm.png";
+import ppcImage from "@/assets/new/services/ppc.png";
+import smoImage from "@/assets/new/services/smo.png";
+import seoImage from "@/assets/new/services/seo.png";
+import socialMarketingImage from "@/assets/new/services/socialMarketing.png";
+import websiteOptimizationImage from "@/assets/new/services/wo.png";
+import webDevelopmentImage from "@/assets/new/services/wd.png";
 
 const services = [
   {
     heading: "Digital Marketing",
-    imgUrl: image.digitalMarketing,
+    imgUrl: digitalMarketingImage,
     hoverBg: "pink-hover",
     iconColor: "pink-text",
   },
   {
     heading: "PPC Service",
-    imgUrl: image.ppc,
+    imgUrl: ppcImage,
     hoverBg: "paste-hover",
     iconColor: "paste-text",
   },
   {
     heading: "SMO Service",
-    imgUrl: image.smo,
+    imgUrl: smoImage,
     hoverBg: "yellow-hover",
     iconColor: "yellow-text",
   },
   {
     heading: "SEO Service",
-    imgUrl: image.seo,
+    imgUrl: seoImage,
     hoverBg: "purple-hover",
     iconColor: "purple-text",
   },
   {
     heading: "Social Marketing",
-    imgUrl: image.socialMarketing,
+    imgUrl: socialMarketingImage,
     hoverBg: "pink-hover",
     iconColor: "pink-text",
   },
   {
     heading: "Web Optimization",
-    imgUrl: image.wo,
+    imgUrl: websiteOptimizationImage,
     hoverBg: "paste-hover",
     iconColor: "paste-text",
   },
   {
     heading: "Web Development",
-    imgUrl: image.wd,
+    imgUrl: webDevelopmentImage,
     hoverBg: "yellow-hover",
     iconColor: "yellow-text",
   },
