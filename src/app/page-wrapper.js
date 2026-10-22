@@ -1,18 +1,22 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
-export const PageWrapper = ({ children }) => (
-  <>
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 15 }}
-        transition={{ delay: 0.25 }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  </>
-);
+export const PageWrapper = ({ children }) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
+      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={
+        prefersReducedMotion
+          ? { duration: 0 }
+          : { duration: 0.4, ease: "easeOut" }
+      }
+    >
+      {children}
+    </motion.div>
+  );
+};
