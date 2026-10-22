@@ -1,12 +1,12 @@
 "use client"
 import { ClipboardDocumentListIcon, CodeBracketIcon, UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
-import React from 'react'
-import { useState } from 'react';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 import CountUp from "react-countup";
-import ScrollTrigger from 'react-scroll-trigger'
 
 const Award = () => {
-  const [countingOn, setCountingOn] = useState(false)
+  const statsRef = useRef(null)
+  const countingOn = useInView(statsRef)
     const stats = [
         { id: 1, name: 'Satisfied customer', value: <CountUp start={0} end={3580} duration={2}/> ,icon:UserGroupIcon},
         { id: 2, name: 'Business owners are happy with us', value: <CountUp start={0} end={3080} duration={2}/>,icon:UserIcon},
@@ -34,8 +34,7 @@ const Award = () => {
       </div>
       <div className="flex items-center flex-col gap-y-12 pt-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <ScrollTrigger  onEnter={() => setCountingOn(true)} onExit={() => setCountingOn(false)}>
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
+          <dl ref={statsRef} className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, k) => {
               return (
                 <div key={k} className="single-counter-two mx-auto flex w-full flex-col gap-y-4 py-10 px-5">
@@ -52,7 +51,6 @@ const Award = () => {
               )
             })}
           </dl>
-          </ScrollTrigger>
         </div>
       </div>
     </div>

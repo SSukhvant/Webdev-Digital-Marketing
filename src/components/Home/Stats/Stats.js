@@ -1,18 +1,18 @@
 "use client"
 import Cta from '@/components/CTA/Cta'
 import './Stats.css'
-import ScrollTrigger from 'react-scroll-trigger'
-import { useState } from 'react'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
   
 
   export default function Stats({stats, heading, para}) {
-    const [countingOn, setCountingOn] = useState(false)
+    const statsRef = useRef(null)
+    const countingOn = useInView(statsRef)
     return (
       <div className="bg-white app__stats py-24 sm:py-32 flex items-center flex-col gap-y-12">
       <Cta heading={heading} para={para}/>
         <div className="app__container">
-        <ScrollTrigger  onEnter={() => setCountingOn(true)} onExit={() => setCountingOn(false)}>
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
+          <dl ref={statsRef} className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, k) => {
               return (
                 <div key={k} className="single-counter-two mx-auto flex w-full flex-col gap-y-4 py-10 px-5">
@@ -29,7 +29,6 @@ import { useState } from 'react'
               )
             })}
           </dl>
-          </ScrollTrigger>
         </div>
       </div>
     )
