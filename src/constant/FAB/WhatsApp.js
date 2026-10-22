@@ -1,18 +1,24 @@
-import Image from "next/image"
-import image from "../Images/image"
+"use client";
 
-const WhatsApp = () => {
-  return (
-    <>
-    <a className="fixed bottom-1/2 -right-10 py-2 px-3 rounded-lg bg-[#29A71A] text-white z-20 drop-shadow-lg font-semibold flex items-center gap-x-1 -rotate-90" href="https://wa.me/1234567890">
-     <Image src={image.whatsapp} height={25} width={25} alt="whats app"/>
-     <p>What&apos;s App</p>
-    </a>
-{/*    <a className="fixed bottom-24 right-4 md:right-8 md:bottom-8 z-20 drop-shadow-lg hidden md:block" href="https://wa.me/7906514988">
-    <Image src={image.whatsapp} height={50} width={50} alt="whats app"/>
-  </a> */}
-    </>
-  )
-}
+import Image from "next/image";
+import image from "../Images/image";
 
-export default WhatsApp
+const WhatsApp = () => (
+  <a
+    href="https://wa.me/7906514988"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with us on WhatsApp"
+    className="fixed bottom-24 right-4 z-40 rounded-full drop-shadow-lg transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green-700 md:bottom-8 md:right-8"
+  >
+    <Image
+      src={image.whatsapp}
+      width={52}
+      height={52}
+      alt=""
+      aria-hidden="true"
+    />
+  </a>
+);
+
+export default WhatsApp;
