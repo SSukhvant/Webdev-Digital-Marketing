@@ -18,13 +18,16 @@ const Footer = () => {
             </h2>
           </div>
           <div>
-            <a href="tel:+917906514988">
-              <button className="primary-btn shadow-lg">Call us Now</button>
+            <a
+              href="tel:+917906514988"
+              className="primary-btn shadow-lg inline-flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              Call us Now
             </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 ld:grid-cols-4 gap-y-8 pt-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-y-8 pt-20">
         <div className="lg:pr-8 text-center md:text-start ">
         <Image src={image.webdevWhite} alt="WebDev" className="mx-auto md:mx-0" width={150} height={150} style={{ height: 'auto' }}/>
         <p className="text-base mt-4 text-slate-200 hover:text-white transition-all duration-300">With 8 years of web and app development skills, we have worked on 100+ Internet development projects. We are a part of BroLabs Innovation Pvt. Ltd., and we are 38 people working together as a team with just one goal: to take your business to a new level.</p>
@@ -56,7 +59,7 @@ const Footer = () => {
               </div>
               <ul className=" list-disc list-inside list-none">
                 <li className="my-2 text-sm text-slate-200 hover:text-white transition-all duration-300">
-                  <Link href="/services/digital-marketing">Ditigal Marketing</Link>
+                  <Link href="/services/digital-marketing">Digital Marketing</Link>
                 </li>
                 <li className="my-2 text-sm text-slate-200 hover:text-white transition-all duration-300">
                   <Link href="/services/ppc-service">PPC Service</Link>
