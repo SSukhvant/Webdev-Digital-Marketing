@@ -13,21 +13,27 @@ export const metadata = {
 }
 const aboutSections = [
   {
+    id: "about-us",
     section: <AboutUs/>
   },
   {
+    id: "awards",
     section: <Award/>
   },
   {
+    id: "best-features",
     section: <BestFeature/>
   },
   {
+    id: "digital-marketing-cta",
     section: <Cta heading={"Digital Marketing SMO & SEO Solution!"} para={"Our digital marketing solutions encompass both SMO (Social Media Optimisation) and SEO (Search Engine Optimisation) strategies, designed to maximise online visibility and engagement for businesses."}/>
   },
   {
+    id: "working-process",
     section: <AboutWorking/>
   },
   {
+    id: "contact-form",
     section: <ContactForm heading={`Get in <span class="highlight">Touch</span>`} color={"bg-white"}/>
   }
 ]
@@ -36,10 +42,10 @@ const About = () => {
     <>
     <Breadcrumbs name={"About Us"}/>
     {
-      aboutSections.map((i, index) => {
+      aboutSections.map((item) => {
         return (
-          <PageWrapper key={index}>
-          {i.section}
+          <PageWrapper key={item.id}>
+          {item.section}
           </PageWrapper>
         )
       })
