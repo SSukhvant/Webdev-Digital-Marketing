@@ -48,7 +48,13 @@ const ContactAddress = () => {
                 <Image src={image.call} alt="call" />
               </div>
               <div className="contact-card-content mt-4">
-                <h6 className='font-semibold'>+91-xxxxxxxxxx </h6>
+                <a
+                  href="tel:+917906514988"
+                  className="font-semibold text-gray-900 transition-colors hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700"
+                  aria-label="Call The Smart Pixel at +91 79065 14988"
+                >
+                  +91 79065 14988
+                </a>
               </div>
             </div>
           </motion.div>
@@ -58,7 +64,12 @@ const ContactAddress = () => {
                 <Image src={image.chat} alt="chat" />
               </div>
               <div className="contact-card-content mt-4">
-                <h6 className='font-semibold'>info@thesmartpixel.tech</h6>
+                <a
+                  href="mailto:info@thesmartpixel.tech"
+                  className="font-semibold text-gray-900 transition-colors hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700"
+                >
+                  info@thesmartpixel.tech
+                </a>
               </div>
             </div>
           </motion.div>
