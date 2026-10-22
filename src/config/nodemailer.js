@@ -1,26 +1,23 @@
 import nodemailer from "nodemailer";
-import smtpTransport from 'nodemailer-smtp-transport';
 
-const email = process.env.EMAIL;
+const email = process.env.EMAIL?.trim();
 const pass = process.env.EMAIL_PASS;
+const host = process.env.SMTP_HOST || "mail.metabrs.com";
+const port = Number(process.env.SMTP_PORT || 465);
+const recipient = process.env.CONTACT_RECIPIENT;
 
-export const transporter = nodemailer.createTransport(
-    smtpTransport({
-      host: 'mail.metabrs.com',
-      port: 465,
-      secure: true, // Use SSL
-      auth: {
-        user: email,
-        pass: pass,
-      },
-      tls: {
-        // do not fail on invalid certs
-        rejectUnauthorized: false,
-      },
-    })
-  );
+if (!email || !pass || !recipient) {
+  console.warn("Contact email is not configured: set EMAIL, EMAIL_PASS and CONTACT_RECIPIENT.");
+}
+
+export const transporter = nodemailer.createTransport({
+  host,
+  port,
+  secure: port === 465,
+  auth: { user: email, pass },
+});
 
 export const mailOptions = {
   from: email,
-  to: "sukhvantsingh2@gmail.com",
+  to: recipient,
 };
