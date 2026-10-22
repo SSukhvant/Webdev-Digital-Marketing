@@ -8,8 +8,8 @@ import { PageWrapper } from "../page-wrapper"
 import ContactForm from "@/components/ContactPage/ContactForm"
 
 export const metadata = {
-  title: 'About - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "About Us",
+  description: "Learn about The Smart Pixel’s approach to digital marketing, search engine optimisation, social media and website development.",
 }
 const aboutSections = [
   {

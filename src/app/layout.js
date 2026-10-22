@@ -11,8 +11,26 @@ const nunito = Nunito({
 });
 
 export const metadata = {
-  title: "Digital Marketing Agency | The Smart Pixel",
-  description: "Web development and digital marketing services, including SEO, social media and paid campaigns.",
+  title: {
+    default: "The Smart Pixel | Digital Marketing & Web Development",
+    template: "%s | The Smart Pixel",
+  },
+  description:
+    "The Smart Pixel offers digital marketing, SEO, paid advertising, social media and web development services for businesses.",
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName: "The Smart Pixel",
+    title: "The Smart Pixel | Digital Marketing & Web Development",
+    description:
+      "Digital marketing, SEO, paid advertising, social media and web development services from The Smart Pixel.",
+  },
+  twitter: {
+    card: "summary",
+    title: "The Smart Pixel | Digital Marketing & Web Development",
+    description:
+      "Digital marketing, SEO, paid advertising, social media and web development services from The Smart Pixel.",
+  },
   verification: {
     other: {
       "fl-verify": "9be66eef7379e3946a735731ecf2c665",

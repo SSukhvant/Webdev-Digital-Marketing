@@ -5,8 +5,8 @@ import Seo from "@/components/SEO/Seo"
 import SeoServices from "@/components/SEO/SeoServices"
 
 export const metadata = {
-  title: 'SEO Service - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "SEO Services",
+  description: "Explore search engine optimisation services focused on making websites easier to discover through relevant content and technical improvements.",
 }
 const SeoService = () => {
   return (

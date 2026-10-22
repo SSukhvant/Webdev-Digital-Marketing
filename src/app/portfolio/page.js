@@ -2,8 +2,8 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs"
 import PortfolioIsoTop from "@/components/Portfolio/PortfolioIsoTop"
 
 export const metadata = {
-  title: 'Portfolio - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Portfolio",
+  description: "Explore selected portfolio work from The Smart Pixel across digital marketing, creative campaigns and web development.",
 }
 
 const Portfolio = () => {

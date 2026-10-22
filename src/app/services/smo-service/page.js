@@ -6,8 +6,8 @@ import ServiceInclude from "@/components/SMO/ServiceInclude"
 import Smo from "@/components/SMO/Smo"
 
 export const metadata = {
-  title: 'SMO Service - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Social Media Optimization",
+  description: "Strengthen your social presence with social media optimisation services for profile improvements, content discovery and audience engagement.",
 }
 const sections = [
   {

@@ -6,8 +6,8 @@ import NeedService from "@/components/SocialMarketing/NeedService"
 import Social from "@/components/SocialMarketing/Social"
 
 export const metadata = {
-  title: 'Social Marketing - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Social Media Marketing",
+  description: "Explore social media marketing services focused on brand visibility, useful content and audience engagement across social platforms.",
 }
 const sections = [
   {

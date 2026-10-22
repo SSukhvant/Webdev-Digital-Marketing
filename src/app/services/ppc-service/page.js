@@ -6,8 +6,8 @@ import Trend from "@/components/PPC/Trend"
 import WeHelp from "@/components/PPC/WeHelp"
 
 export const metadata = {
-  title: 'PPC Service - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "PPC Advertising Services",
+  description: "Learn about pay-per-click advertising services for planning, managing and improving paid digital campaigns across relevant channels.",
 }
 const sections = [
   {
