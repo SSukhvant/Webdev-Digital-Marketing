@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import image from "../Images/image";
+import logoWhite from "@/assets/logo/logoWhite.png";
+import logoBlack from "@/assets/logo/logoBlack.png";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -46,7 +47,7 @@ const Header = () => {
           <Link href="/" className="-m-1.5 p-1.5">
             <Image
               className="h-6 w-auto sm:h-8 md:h-10 transition-all duration-300"
-              src={segment === null ? image.logoWhite : image.logoBlack}
+              src={segment === null ? logoWhite : logoBlack}
               alt="Company Logo"
               width={200}
               height={60}
