@@ -36,9 +36,9 @@ const About = () => {
     <>
     <Breadcrumbs name={"About Us"}/>
     {
-      aboutSections.map((i) => {
+      aboutSections.map((i, index) => {
         return (
-          <PageWrapper key={i}>
+          <PageWrapper key={index}>
           {i.section}
           </PageWrapper>
         )
