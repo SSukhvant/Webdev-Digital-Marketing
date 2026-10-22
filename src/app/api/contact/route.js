@@ -46,6 +46,55 @@ function isRateLimited(ip, now = Date.now()) {
   return false;
 }
 
+async function readJsonBodyLimited(request) {
+  const contentLengthHeader = request.headers.get("content-length");
+  if (contentLengthHeader !== null) {
+    const contentLength = Number(contentLengthHeader);
+    if (!Number.isFinite(contentLength) || contentLength < 0) {
+      return { error: "Invalid Content-Length header.", status: 400 };
+    }
+    if (contentLength > MAX_BODY_BYTES) {
+      return { error: "Request is too large.", status: 413 };
+    }
+  }
+
+  if (!request.body) return { error: "Invalid JSON request body.", status: 400 };
+
+  const reader = request.body.getReader();
+  const chunks = [];
+  let totalBytes = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_BODY_BYTES) {
+        await reader.cancel().catch(() => {});
+        return { error: "Request is too large.", status: 413 };
+      }
+      chunks.push(value);
+    }
+  } catch {
+    return { error: "Unable to read request body.", status: 400 };
+  } finally {
+    reader.releaseLock();
+  }
+
+  const bytes = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  try {
+    return { body: JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)) };
+  } catch {
+    return { error: "Invalid JSON request body.", status: 400 };
+  }
+}
+
 function validatePayload(payload) {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
   const normalized = {};
@@ -75,21 +124,14 @@ function generateEmailContent(data) {
 }
 
 export async function POST(request) {
-  const contentLength = Number(request.headers.get("content-length") || 0);
-  if (contentLength > MAX_BODY_BYTES) return jsonError("Request is too large.", 413);
-
   const forwardedFor = request.headers.get("x-forwarded-for");
   const ip = (forwardedFor ? forwardedFor.split(",")[0] : request.headers.get("x-real-ip") || "unknown").trim();
   if (isRateLimited(ip)) return jsonError("Too many requests. Please try again later.", 429);
 
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return jsonError("Invalid JSON request body.", 400);
-  }
+  const parsed = await readJsonBodyLimited(request);
+  if (parsed.error) return jsonError(parsed.error, parsed.status);
 
-  const data = validatePayload(body);
+  const data = validatePayload(parsed.body);
   if (!data) return jsonError("Please provide valid contact details and all required fields.", 400);
 
   try {
