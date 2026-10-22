@@ -4,8 +4,8 @@ import ContactForm from "@/components/ContactPage/ContactForm"
 import WebOptimization from "@/components/WebOptimization/WebOptimization"
 
 export const metadata = {
-  title: 'Website Optimization - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Website Optimization",
+  description: "Explore website optimisation services focused on usability, responsive presentation and site performance.",
 }
 const WebsiteOptimization = () => {
   return (
