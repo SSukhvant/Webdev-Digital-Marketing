@@ -8,8 +8,8 @@ import Influencer from '@/components/DigitalMarketing/Influencer'
 import Marketing from '@/components/DigitalMarketing/Marketing'
 
 export const metadata = {
-  title: 'Digital Marketing - Digital Marketing Agency / Expert at SEO, SMO',
-  description: 'All digital marketing services, seo, smo, PPC, web development.',
+  title: "Digital Marketing Services",
+  description: "Explore The Smart Pixel’s digital marketing services, including search engine optimisation, social media optimisation, influencer marketing and paid campaigns.",
 }
 const sections = [
   {
