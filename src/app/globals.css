@@ -1200,16 +1200,22 @@
 }
 
 .slide-test {
-  position: absolute;
-  left: 7%;
-  right: 7%;
+  grid-area: 1 / 1;
+  min-width: 0;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.5s ease-in-out;
-  /* background: #ffdbc2; */
 }
 
 .slide-test.activeSlider-test {
   opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-test {
+    transition: none;
+  }
 }
 
 
