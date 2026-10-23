@@ -47,17 +47,19 @@ const testimonials = [
 const Test = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (isPaused || prefersReducedMotion) return undefined;
+    if (isPaused || isHovered || hasFocus || prefersReducedMotion) return undefined;
 
     const interval = setInterval(() => {
       setActiveSlide((current) => (current + 1) % testimonials.length);
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [isPaused, prefersReducedMotion]);
+  }, [isPaused, isHovered, hasFocus, prefersReducedMotion]);
 
   const showPrevious = () => {
     setIsPaused(true);
@@ -76,8 +78,14 @@ const Test = () => {
         role="region"
         aria-roledescription="carousel"
         aria-label="Client testimonials"
-        onMouseEnter={() => setIsPaused(true)}
-        onFocusCapture={() => setIsPaused(true)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onFocusCapture={() => setHasFocus(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setHasFocus(false);
+          }
+        }}
       >
         <div className="relative left-[5%] right-[5%] h-80 min-w-0">
           <ChatBubbleLeftRightIcon
