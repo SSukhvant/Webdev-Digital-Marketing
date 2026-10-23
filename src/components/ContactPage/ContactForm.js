@@ -1,7 +1,7 @@
 "use client";
 
-import image from "@/constant/Images/image";
 import { sendContactForm } from "@/lib/api";
+import contactIllustration from "@/assets/img/contact/Contact-get-tuch.png";
 import { FaEnvelope } from "@react-icons/all-files/fa/FaEnvelope";
 import Image from "next/image";
 import { useState } from "react";
@@ -37,7 +37,7 @@ export default function ContactForm({ heading, color = "bg-white" }) {
     <section className={color}>
       <div className="app__container grid grid-cols-1 gap-12 py-16 md:grid-cols-2 md:py-24">
         <div className="my-auto">
-          <Image src={image.getInTouch} alt="Contact our team" className="h-auto w-full" />
+          <Image src={contactIllustration} alt="Contact our team" className="h-auto w-full" />
         </div>
         <form onSubmit={handleSubmit} className="min-w-0" aria-busy={status.type === "loading"}>
           <div className="pb-6">

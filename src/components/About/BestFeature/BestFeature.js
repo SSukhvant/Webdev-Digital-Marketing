@@ -1,9 +1,9 @@
 'use client'
 import { motion } from 'framer-motion'
-import image from "@/constant/Images/image"
 import { ComputerDesktopIcon } from "@heroicons/react/20/solid"
 import { ArrowPathIcon, ArrowTrendingUpIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
+import aboutIllustration from "@/assets/img/about/About-ani-img.png"
 
 const variants = {
   hidden: { opacity: 0 },
@@ -68,7 +68,7 @@ const BestFeature = () => {
        }
       </motion.div>
       <div className="my-auto">
-      <Image src={image.aboutAni} alt="about"/>
+      <Image src={aboutIllustration} alt="about"/>
       </div>
       </div>
       </div>

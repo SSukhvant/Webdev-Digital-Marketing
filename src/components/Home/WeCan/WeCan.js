@@ -1,37 +1,43 @@
 "use client"
-import image from "@/constant/Images/image"
 import Image from "next/image"
+import digitalMarketingImage from "@/assets/new/services/dm.png";
+import ppcImage from "@/assets/new/services/ppc.png";
+import smoImage from "@/assets/new/services/smo.png";
+import seoImage from "@/assets/new/services/seo.png";
+import socialMarketingImage from "@/assets/new/services/socialMarketing.png";
+import websiteOptimizationImage from "@/assets/new/services/wo.png";
+import webDevelopmentImage from "@/assets/new/services/wd.png";
 import { useEffect, useState } from "react";
 
 const WeCan = () => {
    const services = [
     {
         name: "Digital Marketing",
-        imgUrl: image.digitalMarketing,
+        imgUrl: digitalMarketingImage,
         bgColour: "bg-green-100"
     },{
         name: "PPC Services",
-        imgUrl: image.ppc,
+        imgUrl: ppcImage,
         bgColour: "bg-slate-100"
     },{
         name: "SMO Services",
-        imgUrl: image.smo,
+        imgUrl: smoImage,
         bgColour: "bg-yellow-100"
     },{
         name: "SEO Services",
-        imgUrl: image.seo,
+        imgUrl: seoImage,
         bgColour: "bg-rose-100"
     },{
         name: "Social Marketing",
-        imgUrl: image.socialMarketing,
+        imgUrl: socialMarketingImage,
         bgColour: "bg-purple-100"
     },{
         name: "Website Optimization",
-        imgUrl: image.wo,
+        imgUrl: websiteOptimizationImage,
         bgColour: "bg-blue-100"
     },{
         name: "Web Development",
-        imgUrl: image.wd,
+        imgUrl: webDevelopmentImage,
         bgColour: "bg-pink-100"
     },
    ]

@@ -1,8 +1,8 @@
 'use client'
 import Image from "next/image"
 import './Hero.css'
-import image from "@/constant/Images/image"
 import Link from "next/link"
+import webdevIllustration from "@/assets/new/svg3.svg"
 import {motion } from 'framer-motion'
 
 
@@ -25,7 +25,7 @@ const Home = () => {
     </div>
     </motion.div>
     <div className=" flex-1 hidden lg:block">
-    <Image src={image.webdev} alt="dm"/></div>
+    <Image src={webdevIllustration} alt="dm"/></div>
     </div>
     </div>
 
