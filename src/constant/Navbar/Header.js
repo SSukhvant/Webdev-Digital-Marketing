@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import logoWhite from "@/assets/logo/logoWhite.png";
@@ -13,31 +14,37 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const segment = useSelectedLayoutSegment();
   const dropdownRef = useRef(null);
+  const servicesTriggerRef = useRef(null);
 
   const handleHover = () => {
     setToggle(true);
   };
 
-  // const handleLeave = () => {
-  //   setToggle(false);
-  // };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape" && toggle) {
+      event.preventDefault();
+      setToggle(false);
+      servicesTriggerRef.current?.focus();
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handlePointerDown = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setToggle(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handlePointerDown);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("pointerdown", handlePointerDown);
     };
-  }, [dropdownRef]);
+  }, []);
 
   return (
     <header
       ref={dropdownRef}
+      onKeyDown={handleKeyDown}
       className={`sticky top-0 z-50 ${
         segment === null ? "bg-[#4039D4]" : "bg-white shadow-sm"
       }`}
@@ -55,73 +62,81 @@ const Header = () => {
             />
           </Link>
         </div>
-        <div
+
+        <nav
+          aria-label="Primary navigation"
           className={`hidden md:flex justify-center items-center gap-0 lg:gap-7 ${
             segment === null ? "text-[#eeeeee]" : "text-gray-900 "
           }`}
         >
-        <motion.div whileHover={{scale: 1.1}}>
-          <Link
-            href="/"
-            className={`px-3 py-2 text-sm ${segment === null ? "navlink-white" : "navlink"} ${
-              segment === null ? "active-white" : ""
-            }`}
-            onClick={() => setToggle(false)}
-          >
-            Home
-          </Link>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Link
+              href="/"
+              className={`px-3 py-2 text-sm ${
+                segment === null ? "navlink-white" : "navlink"
+              } ${segment === null ? "active-white" : ""}`}
+              onClick={() => setToggle(false)}
+            >
+              Home
+            </Link>
           </motion.div>
 
-          <motion.div whileHover={{scale: 1.1}}>
-          <Link
-            href="/about"
-            className={`px-3 py-2 text-sm ${segment === null ? "navlink-white" : "navlink"} ${
-              segment === "about" ? "active" : ""
-            }`}
-            onClick={() => setToggle(false)}
-          >
-            About Us
-          </Link>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Link
+              href="/about"
+              className={`px-3 py-2 text-sm ${
+                segment === null ? "navlink-white" : "navlink"
+              } ${segment === "about" ? "active" : ""}`}
+              onClick={() => setToggle(false)}
+            >
+              About Us
+            </Link>
           </motion.div>
 
-          <motion.div whileHover={{scale: 1.1}}>
-          <button
-            className={`px-3 py-2 text-sm flex items-center ${segment === null ? "navlink-white" : "navlink"}`}
-            onClick={() => setToggle(!toggle)}
-            onMouseEnter={handleHover}
-          >
-            Our Services
-            <ChevronDownIcon
-              className={`h-5 w-5 flex-none ${toggle ? "rotate-180" : ""}`}
-              aria-hidden="true"
-            />
-          </button>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <button
+              ref={servicesTriggerRef}
+              type="button"
+              aria-expanded={toggle}
+              aria-controls="desktop-services-menu"
+              className={`px-3 py-2 text-sm flex items-center ${
+                segment === null ? "navlink-white" : "navlink"
+              }`}
+              onClick={() => setToggle((isOpen) => !isOpen)}
+              onMouseEnter={handleHover}
+            >
+              Our Services
+              <ChevronDownIcon
+                className={`h-5 w-5 flex-none ${toggle ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
           </motion.div>
 
-          <motion.div whileHover={{scale: 1.1}}>
-          <Link
-            href="/portfolio"
-            className={`px-3 py-2 text-sm ${segment === null ? "navlink-white" : "navlink"} ${
-              segment === "portfolio" ? "active" : ""
-            }`}
-            onClick={() => setToggle(false)}
-          >
-            Portfolio
-          </Link>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Link
+              href="/portfolio"
+              className={`px-3 py-2 text-sm ${
+                segment === null ? "navlink-white" : "navlink"
+              } ${segment === "portfolio" ? "active" : ""}`}
+              onClick={() => setToggle(false)}
+            >
+              Portfolio
+            </Link>
           </motion.div>
 
-          <motion.div whileHover={{scale: 1.1}}>
-          <Link
-            href="/contact"
-            className={`px-3 py-2 text-sm ${segment === null ? "navlink-white" : "navlink"} ${
-              segment === "contact" ? "active" : ""
-            }`}
-            onClick={() => setToggle(false)}
-          >
-            Contact Us
-          </Link>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Link
+              href="/contact"
+              className={`px-3 py-2 text-sm ${
+                segment === null ? "navlink-white" : "navlink"
+              } ${segment === "contact" ? "active" : ""}`}
+              onClick={() => setToggle(false)}
+            >
+              Contact Us
+            </Link>
           </motion.div>
-        </div>
+        </nav>
 
         <div className="flex flex-1 justify-end">
           <a href="tel:+917906514988" className="navbar-btn shadow-lg">
@@ -131,6 +146,7 @@ const Header = () => {
       </div>
 
       <div
+        id="desktop-services-menu"
         className={`p-4 absolute z-99 top-[5.5rem] lg:left-[20%] lg:right-[20%] bg-white rounded-lg shadow-lg grid grid-cols-2 transition-all duration-300 ease-in-out ${
           toggle ? "opacity-100 visible mt-2" : "opacity-0 invisible"
         }`}
